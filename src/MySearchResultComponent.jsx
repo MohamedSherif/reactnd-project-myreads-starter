@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {update } from './BooksAPI'
+// import {update } from './BooksAPI'
 
 class MySearchResultComponent extends React.Component {
   // constructor() {
@@ -35,7 +35,7 @@ class MySearchResultComponent extends React.Component {
                       <div className="book-top">
                         <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url(' + imgUrl + ')' }}></div>
                         <div className="book-shelf-changer">
-                          <select defaultValue={bookShelf} onChange={(event) => { update(book, event.target.value) }}>
+                          <select defaultValue={bookShelf} onChange={(event) => { this.props.doUpdate(book, event.target.value) }}>
                             <option value="move" disabled>Move to...</option>
                             <option value="currentlyReading" >Currently Reading</option>
                             <option value="wantToRead" >Want to Read</option>

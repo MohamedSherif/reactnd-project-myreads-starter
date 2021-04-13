@@ -49,7 +49,7 @@ class MySearchPageComponent extends React.Component {
           </div>
         </div>
         <div className="search-books-results">
-          <MySearchResultComponent books={this.state.books} />
+          <MySearchResultComponent books={this.state.books} doUpdate = {this.props.doUpdate}/>
         </div>
       </div>
     )
