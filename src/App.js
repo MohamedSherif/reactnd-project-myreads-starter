@@ -36,12 +36,19 @@ class BooksApp extends React.Component {
 
   doUpdate(book, newShelf){
     let books = this.state.allBooks;
+    var bookFound = false;
     
     books.forEach(currentBook => {
       if(currentBook.id === book.id){
         currentBook.shelf = newShelf;
+        bookFound = true;
       }
     });
+
+    if(!bookFound){
+      book.shelf = newShelf;
+      books.push(book);
+    }
 
     debugger;
     
@@ -62,7 +69,7 @@ class BooksApp extends React.Component {
             <MyMainPageComponent allBooks = {this.state.allBooks} doUpdate = {this.doUpdate}/>
           )} />
           <Route exact path='/search' render={() => (
-            <MySearchPageComponent allBooks = {this.state.allBooks}/>
+            <MySearchPageComponent allBooks = {this.state.allBooks} doUpdate = {this.doUpdate}/>
           )} />
           <Route component={NotFoundPageComponent} />
         </Switch>
