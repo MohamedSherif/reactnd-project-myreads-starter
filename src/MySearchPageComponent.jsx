@@ -10,9 +10,24 @@ class MySearchPageComponent extends React.Component {
     this.state = { books: [] };
   }
 
-  async doSearch(value){
-    var result = await search(value);
-    this.setState({ books: result});
+  async doSearch(value) {
+
+    search(value).then(result => {
+      if (result !== undefined && result != null && Array.isArray(result)) {
+        let booksOnShelves = this.props.allBooks;
+        for (let book of result) {
+          for (let i = 0; i < booksOnShelves.length; i++) {
+            if (book.id === booksOnShelves[i].id) {
+              book.shelf = booksOnShelves[i].shelf;
+              console.log(booksOnShelves[i].shelf);
+            }
+          }
+        }
+        debugger;
+        console.log(result);
+        this.setState({ books: result });
+      }
+    });
   }
 
   render() {
@@ -34,7 +49,7 @@ class MySearchPageComponent extends React.Component {
           </div>
         </div>
         <div className="search-books-results">
-          <MySearchResultComponent books = {this.state.books}/>
+          <MySearchResultComponent books={this.state.books} />
         </div>
       </div>
     )

@@ -196,3 +196,9 @@ button:active {
   text-align: center;
   font-size: 0.8em;
 }
+
+.not-found-title {
+  padding: 10px 0;
+  background: #d32b2b;
+  text-align: center;
+}
