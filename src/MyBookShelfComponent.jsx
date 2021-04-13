@@ -1,26 +1,26 @@
 import React from 'react';
 
-import { getAll, update } from './BooksAPI'
-
 class MyBookShelfComponent extends React.Component {
   constructor() {
     super();
     this.state = { books: [] };
   }
   
-  async componentDidMount() {
-    var result = await getAll();
-    console.log(result);
-    this.setState({ books: result });
-  }
-  
+  // doUpdate(book, newShelf){
+  //   // book.shelf = newShelf;
+  //   // let books = this.state.books;
+
+  //   this.setState({books: []});
+  //   update(book, newShelf); 
+  // }
+
   render() {
-    if (this.state.books !== undefined && this.state.books.length > 0) {
+    if (this.props.books !== undefined && this.props.books.length > 0) {
       return (
         <div>
           <ol className="books-grid">
             {
-              this.state.books.filter(book => book.shelf === this.props.shelf).map((book) => {
+              this.props.books.map((book) => {
                 let imgUrl = '';
                 let bookShelf = 'none';
                 if (book.shelf !== undefined) {
@@ -35,7 +35,7 @@ class MyBookShelfComponent extends React.Component {
                       <div className="book-top">
                         <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url(' + imgUrl + ')' }}></div>
                         <div className="book-shelf-changer">
-                          <select defaultValue={bookShelf} onChange={(event) => { update(book, event.target.value) }}>
+                          <select defaultValue={bookShelf} onChange={(event) => { this.props.doUpdate(book, event.target.value) }}>
                             <option value="move" disabled>Move to...</option>
                             <option value="currentlyReading" >Currently Reading</option>
                             <option value="wantToRead" >Want to Read</option>
